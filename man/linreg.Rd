@@ -20,5 +20,5 @@ a table of results
 Runs linear regression model
 }
 \examples{
-linreg(am, mpg, mtcars)
+linreg(rep(0,10), 1:10, mtcars)
 }

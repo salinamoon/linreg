@@ -5,7 +5,7 @@
 #' @param dataset dataset containing y and x
 #' @return a table of results
 #' @examples
-#' linreg(am, mpg, mtcars)
+#' linreg(rep(0,10), 1:10, mtcars)
 #' @export
 
 linreg = function(y, x, dataset) {
