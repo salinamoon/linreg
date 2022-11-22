@@ -1,3 +1,3 @@
 test_that("SLR works", {
-  expect_equal(linreg(am, mpg, mtcars), c(-0.59149275, 0.04966211))
+  expect_equal(linreg(rep(0,10), 1:10, mtcars), c(0, 0))
 })

@@ -9,8 +9,11 @@
 #' @export
 
 linreg = function(y, x, dataset) {
-  Y = dataset[[substitute(y)]]
-  X = cbind(1, dataset[[substitute(x)]])
+#  Y = dataset[[substitute(y)]]
+#  X = cbind(1, dataset[[substitute(x)]])
+  Y = y
+  X = cbind(1, x)
   beta = solve(t(X)%*%X)%*%t(X)%*%Y
-  return(beta)
+  return(as.vector(beta))
 }
+
