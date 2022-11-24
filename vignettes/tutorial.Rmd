@@ -17,3 +17,24 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(linreg)
 ```
+
+# Overview
+The linreg function 
+```{r}
+linreg(rep(0,10), 1:10, mtcars)
+```
+
+# Performance
+The output's correctness can be verified by the lm function. 
+```{r}
+test1 = as.matrix(linreg("hp", "mpg", mtcars))
+test2 = summary(lm(hp ~ mpg, data=mtcars))$coefficients
+
+# ignoring differences in row/column names
+rownames(test1) = NULL
+colnames(test1) = NULL
+rownames(test2) = NULL
+colnames(test2) = NULL
+
+all.equal(test1, test2)
+```

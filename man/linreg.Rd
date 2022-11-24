@@ -4,7 +4,7 @@
 \alias{linreg}
 \title{Linear Regression}
 \usage{
-linreg(y, x, dataset)
+linreg(y, x, dataset = NULL)
 }
 \arguments{
 \item{y}{outcome or dependent variable}
