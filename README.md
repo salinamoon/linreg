@@ -10,7 +10,8 @@ Overview
 -----------
 
 The linreg package was created for BIOSTAT 625 Homework 3. 
-It contains the linreg function, which outputs the results of a linear regression analysis, similar to the lm function.
+It contains the linreg function, which fits a linear regression model on numeric data. 
+The result is a table of coefficient estimates, similar to the lm function.
 
 Installation
 -----------
@@ -21,4 +22,4 @@ devtools::install_github("salinamoon/linreg")
 Help
 -----------
 
-For help, please refer to the documentatiom and vignette. 
+For help, please refer to the documentation and vignette. 
