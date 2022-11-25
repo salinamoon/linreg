@@ -1,11 +1,12 @@
 #' @title Linear Regression
-#' @description Runs linear regression model
-#' @param y outcome or dependent variable
-#' @param x matrix of covariates or independent variables
-#' @param dataset dataset containing y and x
-#' @return a table of results
+#' @description This functions fits a linear regression model and provides parameter estimates and significance.
+#' @param y a numeric vector or name of a column vector in the specified dataset
+#' @param x a list of one or more numeric vectors or names of a column vector in the specified dataset
+#' @param dataset (optional) a dataset containing the column vectors listed
+#' @return The function outputs a table of beta estimates, SE, t statistics, and p values.
 #' @examples
-#' linreg("hp", list(cyl = "cyl"), mtcars)
+#' linreg(mtcars$mpg, list(cyl = mtcars$cyl, disp = mtcars$disp))
+#' linreg("mpg", list(cyl = "cyl", disp = mtcars$dis), mtcars)
 #' @importFrom stats pt
 #' @importFrom bench mark
 #' @export

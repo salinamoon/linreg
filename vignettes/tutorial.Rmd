@@ -17,8 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(linreg)
 library(bench)
-# library(ggplot2)
-# library(ggbeeswarm)
 ```
 
 ## Overview
@@ -62,6 +60,5 @@ time = bench::mark(as.vector(as.matrix(linreg(benchtesty, list(benchtestx = benc
 
 time[,1] = c("linreg","lm")
 print(time)
-# plot(time)
 ```
 

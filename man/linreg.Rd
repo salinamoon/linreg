@@ -7,18 +7,19 @@
 linreg(y, x, dataset = NULL)
 }
 \arguments{
-\item{y}{outcome or dependent variable}
+\item{y}{a numeric vector or name of a column vector in the specified dataset}
 
-\item{x}{matrix of covariates or independent variables}
+\item{x}{a list of one or more numeric vectors or names of a column vector in the specified dataset}
 
-\item{dataset}{dataset containing y and x}
+\item{dataset}{(optional) a dataset containing the column vectors listed}
 }
 \value{
-a table of results
+The function outputs a table of beta estimates, SE, t statistics, and p values.
 }
 \description{
-Runs linear regression model
+This functions fits a linear regression model and provides parameter estimates and significance.
 }
 \examples{
-linreg("hp", list(cyl = "cyl"), mtcars)
+linreg(mtcars$mpg, list(cyl = mtcars$cyl, disp = mtcars$disp))
+linreg("mpg", list(cyl = "cyl", disp = mtcars$dis), mtcars)
 }
