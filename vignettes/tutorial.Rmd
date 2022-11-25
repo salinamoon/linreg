@@ -27,7 +27,7 @@ cyl = mtcars[,2]
 disp = mtcars[,3]
 
 # x: one vector of covariates
-linreg(mpg, list(cyl = cyl))
+linreg(mpg, cyl)
 
 # x: a list of multiple vectors
 linreg(mpg, list(cyl = cyl, disp = disp))
@@ -49,7 +49,7 @@ test2 = summary(lm(hp ~ cyl, data = mtcars))$coefficients
 
 all.equal(as.vector(test1), as.vector(test2))
 ```
-The linreg function is approximately 7 times more efficient than lm at parameter estimation and inference. The trade-off is that linreg does not provide additional model information, such as F-statistic. 
+The linreg function is approximately 8 times more efficient than lm at parameter estimation and inference. The trade-off is that linreg does not provide additional model information, such as F-statistic. 
 ```{r, fig.dim = c(6, 3)}
 set.seed(625)
 benchtesty = rnorm(1e5)

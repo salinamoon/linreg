@@ -61,7 +61,7 @@ linreg = function(y, x, dataset=NULL) {
                            SE = betase,
                            t = tstat,
                            p = prob))
-  rownames(final) = c("Intercept", names(x))
+  rownames(final) = c("Intercept", xvar)
 
   return(final)
 }

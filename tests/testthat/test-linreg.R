@@ -4,12 +4,18 @@ test_that("linreg works", {
                                           mtcars))),
                as.vector(summary(lm(hp ~ cyl,
                                     data = mtcars))$coefficients))
+
   expect_equal(as.vector(as.matrix(linreg("notcar",
-                                          list(cyl = "cyl"),
+                                          cyl,
                                           mtcars))),
                "y is not found in dataset")
+
   expect_equal(as.vector(as.matrix(linreg(mtcars$hp,
                                           list(cyl = mtcars$cyl)))),
                as.vector(summary(lm(hp ~ cyl,
                                     data = mtcars))$coefficients))
+
+  expect_equal(as.vector(as.matrix(linreg(mtcars$hp,
+                                          mtcars$cyl))),
+               as.vector(summary(lm(mtcars$hp ~ mtcars$cyl))$coefficients))
 })
