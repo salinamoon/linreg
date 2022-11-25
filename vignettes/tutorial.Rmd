@@ -32,6 +32,14 @@ linreg(mpg, list(cyl = cyl))
 # x: a list of multiple vectors
 linreg(mpg, list(cyl = cyl, disp = disp))
 ```
+If a dataset is specified, and the function looks for parameters y and x first in the column names of the dataset (in which case, they must be written in quotation marks), then in the environment. 
+```{r}
+# y and x are columns from the dataset
+linreg("hp", list(drat = "drat"), mtcars)
+
+# vectors from outside the dataset can be included
+linreg(mpg, list(cyl = cyl, drat = "drat"), mtcars)
+```
 
 # Performance
 The output's correctness can be verified by the lm function. 
