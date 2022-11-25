@@ -17,9 +17,11 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(linreg)
 library(bench)
+library(ggplot2)
+library(ggbeeswarm)
 ```
 
-# Overview
+## Overview
 The linreg function fits a linear regression model on a numeric vector (y) and a numeric vector or list of numeric vectors (x).
 ```{r}
 mpg = mtcars[,1]
@@ -41,7 +43,7 @@ linreg("hp", list(drat = "drat"), mtcars)
 linreg(mpg, list(cyl = cyl, drat = "drat"), mtcars)
 ```
 
-# Performance
+## Performance
 The output's correctness can be verified by the lm function. 
 ```{r}
 test1 = as.matrix(linreg("hp", list(cyl = "cyl"), mtcars))
@@ -49,7 +51,7 @@ test2 = summary(lm(hp ~ cyl, data = mtcars))$coefficients
 
 all.equal(as.vector(test1), as.vector(test2))
 ```
-The linreg function is approximately 7 times more efficient than lm at parameter estimation and inference. The tradeoff is that linreg does not provide additional model information, such as F-statistic. 
+The linreg function is approximately 7 times more efficient than lm at parameter estimation and inference. The trade-off is that linreg does not provide additional model information, such as F-statistic. 
 ```{r, fig.dim = c(6, 3)}
 set.seed(625)
 benchtesty = rnorm(1e5)
