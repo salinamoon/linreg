@@ -18,12 +18,13 @@ linreg = function(y, x, dataset=NULL) {
   }
 
   # look for x and var names in dataset, otherwise in environment
-  if(!is.null(dataset) && prod(x %in% colnames(dataset)) > 0) {
-    X = cbind(1, as.matrix(subset(dataset, select = x)))
-    xvars = x
-  } else {
-    X = cbind(1, x)
-    xvars = deparse(substitute(x))
+  X = 1
+  for (i in 1:length(x)) {
+    if (!is.null(dataset) && names(x)[i] %in% colnames(dataset)) {
+      X = cbind(X, dataset[[ names(x)[i] ]])
+    } else {
+      X = cbind(X, x[[i]])
+    }
   }
 
   # calculate beta estimate, SE, and p
@@ -43,7 +44,7 @@ linreg = function(y, x, dataset=NULL) {
                            SE = betase,
                            t = tstat,
                            p = prob))
-  rownames(final) = c("Intercept", xvars)
+  rownames(final) = c("Intercept", names(x))
 
   return(final)
 }

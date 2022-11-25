@@ -16,25 +16,42 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(linreg)
+library(bench)
 ```
 
 # Overview
-The linreg function 
+The linreg function fits a linear regression model on a numeric vector (y) and a numeric vector or list of numeric vectors (x).
 ```{r}
-linreg(rep(0,10), 1:10, mtcars)
+mpg = mtcars[,1]
+cyl = mtcars[,2]
+disp = mtcars[,3]
+
+# x: one vector of covariates
+linreg(mpg, list(cyl = cyl))
+
+# x: a list of multiple vectors
+linreg(mpg, list(cyl = cyl, disp = disp))
 ```
 
 # Performance
 The output's correctness can be verified by the lm function. 
 ```{r}
-test1 = as.matrix(linreg("hp", "mpg", mtcars))
-test2 = summary(lm(hp ~ mpg, data=mtcars))$coefficients
+test1 = as.matrix(linreg("hp", list(cyl = "cyl"), mtcars))
+test2 = summary(lm(hp ~ cyl, data = mtcars))$coefficients
 
-# ignoring differences in row/column names
-rownames(test1) = NULL
-colnames(test1) = NULL
-rownames(test2) = NULL
-colnames(test2) = NULL
-
-all.equal(test1, test2)
+all.equal(as.vector(test1), as.vector(test2))
 ```
+The linreg function is approximately 7 times more efficient than lm at parameter estimation and inference. The tradeoff is that linreg does not provide additional model information, such as F-statistic. 
+```{r, fig.dim = c(6, 3)}
+set.seed(625)
+benchtesty = rnorm(1e5)
+benchtestx = rnorm(1e5)
+
+time = bench::mark(as.vector(as.matrix(linreg(benchtesty, list(benchtestx = benchtestx)))),
+                   as.vector(summary(lm(benchtesty ~ benchtestx))$coefficients))
+
+time[,1] = c("linreg","lm")
+print(time)
+plot(time)
+```
+
