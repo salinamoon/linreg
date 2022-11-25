@@ -25,11 +25,22 @@ linreg = function(y, x, dataset=NULL) {
 
   # look for x in dataset, otherwise in environment
   X = 1 # intercept
-  for (i in 1:length(x)) {
-    if (!is.null(dataset) && names(x)[i] %in% colnames(dataset)) {
-      X = cbind(X, dataset[[ names(x)[i] ]])
+  if (is.list(x)) {
+    for (i in 1:length(x)) {
+      if (!is.null(dataset) && names(x)[i] %in% colnames(dataset)) {
+        X = cbind(X, dataset[[ names(x)[i] ]])
+      } else {
+        X = cbind(X, x[[i]])
+      }
+    }
+    xvar = names(x)
+  } else {
+    if (!is.null(dataset) && x %in% colnames(dataset)) {
+      X = cbind(X, dataset[[x]])
+      xvar = x
     } else {
-      X = cbind(X, x[[i]])
+      X = cbind(X, x)
+      xvar = deparse(substitute(x))
     }
   }
 
